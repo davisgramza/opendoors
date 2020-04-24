@@ -4,3 +4,4 @@ flask_login
 pymysql
 cryptography
 Flask-Mail
+gunicorn

@@ -39,12 +39,13 @@ def load_user(user_id):
     return Administrator.query.get(user_id)
 
 
-db.drop_all()
-db.create_all()
-
 from setup import setup
 
-setup()
+try:
+    setup()
+except Exception as e:
+    logging.exception(e)
+    traceback.print_exc()
 
 if __name__ == '__main__':
     app.run()

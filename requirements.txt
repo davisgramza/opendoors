@@ -5,3 +5,4 @@ pymysql
 cryptography
 Flask-Mail
 gunicorn
+psycopg2

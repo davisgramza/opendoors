@@ -7,6 +7,10 @@ from validations import NotificationIdentifiers
 
 
 def setup():
+    db.create_all()
+    if os.environ.get('RESET'):
+        db.drop_all()
+        db.create_all()
     if not Administrator.query.first():
         administrator = Administrator(username=os.getenv('ADMINISTRATOR_USERNAME'), hash=generate_password_hash(os.getenv('ADMINISTRATOR_PASSWORD')))
         db.session.add(administrator)

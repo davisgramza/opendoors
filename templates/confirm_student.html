@@ -1,0 +1,24 @@
+{% extends "template.html" %}
+
+{% block title %}Confirm Student{% endblock %}
+
+{% block body %}
+    <p class="text-center"><span class="title">Confirm {{ student.last_name }}, {{ student.first_name }}</span></p>
+    <div class="text-center mb-2">
+        <p>Confirms the student to be part of the opportunity for their selected opportunity. If you would like to delete this student, click the delete button.</p>
+        <a class="btn-sm btn-danger" href="{{ url_for('student.delete_student', sid=student.id) }}">Delete Student</a>
+    </div>
+    <form action="/confirm_student/{{ student.id }}" method="post">
+        <div class="form-group">
+            <p>Please confirm to confirm the student:</p>
+            <label for="confirmation">Confirmation</label>
+            <select name="confirmation" id="confirmation" class="form-control">
+                <option selected disabled> ---</option>
+                <option value="confirm">Confirm</option>
+            </select>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+{% endblock %}

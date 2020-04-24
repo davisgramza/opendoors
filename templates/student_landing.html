@@ -1,0 +1,16 @@
+{% extends "template.html" %}
+
+{% block title %}Open Doors{% endblock %}
+
+{% block body %}
+    <div class="summary">
+        <p class="text-center"><span class="title">Open Doors</span></p>
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Open Doors flagship logo">
+        <hr/>
+        <p>Welcome to Open Doors!</p>
+        <p>The current status of the program is currently <span class="{% if status == 'Active' %}text-success{% elif status  == 'Preview' %}title{% else %}text-danger{% endif %}">{{ status }}</span>
+        </p>
+        <p>{{ message }}</p>
+        <a class="btn btn-primary" href="{{ url_for('mentor.view_mentors') }}">View Opportunities</a>
+    </div>
+{% endblock %}

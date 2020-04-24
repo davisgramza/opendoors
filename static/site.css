@@ -1,0 +1,132 @@
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+img {
+    max-height: 152px;
+    max-width: 352px;
+}
+
+.login-form {
+    border-radius: 10px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    display: inline-block;
+    padding: 15px;
+}
+
+.form-wrapper {
+    text-align: center;
+}
+
+label {
+    display: block;
+    text-align: initial;
+}
+
+.summary {
+    background-color: whitesmoke;
+    padding: 10px;
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 3px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    text-align: center;
+}
+
+.enclosing {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.title {
+    font-weight: bold;
+}
+
+a {
+    color: inherit;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding: 15px;
+}
+
+#error {
+    margin-bottom: 0;
+}
+
+.mentor-section {
+    padding: 10px;
+    min-width: 330px;
+    width: 80%;
+    border-color: darkgrey;
+    border-width: 1px;
+    border-radius: 5px;
+    border-style: solid;
+    max-width: 670px;
+    min-height: 350px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.outline-box {
+    border-color: darkgrey;
+    border-width: 1px;
+    border-radius: 5px;
+    border-style: solid;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.mentor-section p {
+    text-align: left;
+}
+
+.success-container {
+    padding: 5px;
+    border-style: solid;
+    border-color: darkgreen;
+    border-width: 1px;
+    margin-bottom: 10px;
+}
+
+.success-container p {
+    margin-bottom: 0;
+}
+
+.print {
+    page-break-before: always;
+}
+
+table {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.student-mentor-table {
+    max-width: 20%;
+}
+
+table, th, td {
+    border: 1px solid black !important;
+}
+
+.grey {
+    background-color: #E5E5E5;
+}
+
+.table-header {
+    background-color: black;
+    color: white;
+}
+
+.table-opportunity-student-information {
+    margin-bottom: 0;
+}

@@ -1,0 +1,81 @@
+{% extends "template.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div>
+        <div class="justify-content-center mentor-section">
+            <p class="text-center"><span class="title">{{ mentor.mentor_name }}</span></p>
+            <hr/>
+            <p><span class="title">Category: </span>{{ mentor.category }}</p>
+            <p><span class="title"></span></p>
+            <p><span class="title">Address: </span>{{ mentor.address }}</p>
+            <p><span class="title">Description: </span>{{ mentor.description }}</p>
+            <p><span class="title">Special Instructions: </span> {{ mentor.special_instructions }}</p>
+            <hr/>
+            <p>Disclaimer:</p>
+            <p>{{ disclaimer }}</p>
+        </div>
+        <hr/>
+        <div>
+            <p><span class="title">Register for {{ mentor.mentor_name }}</span></p>
+            <form action="/register/{{ mentor.id }}" method="post">
+                <div class="form-group">
+                    <label for="first-name">First Name</label>
+                    <input type="text" class="form-control" id="first-name" name="first-name" placeholder="First Name">
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" class="form-control" id="last-name" name="last-name" placeholder="Last Name">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+                </div>
+                <div class="form-group">
+                    <label for="home-phone">Home Phone</label>
+                    <input type="tel" class="form-control" id="home-phone" name="home-phone" placeholder="Home Phone">
+                </div>
+                <div class="form-group">
+                    <label for="cell-phone">Cell Phone</label>
+                    <input type="tel" class="form-control" id="cell-phone" name="cell-phone" placeholder="Cell Phone">
+                </div>
+                <div class="form-group">
+                    <label for="student-email">Student Email</label>
+                    <input type="email" class="form-control" id="student-email" name="student-email" placeholder="Student Email">
+                </div>
+                <div class="form-group">
+                    <label for="parent-email">Parent Email</label>
+                    <input type="email" class="form-control" id="parent-email" name="parent-email" placeholder="Parent Email">
+                </div>
+                <div class="form-group">
+                    <label for="lunch-period">Lunch Period</label>
+                    <input type="text" class="form-control" id="lunch-period" name="lunch-period" placeholder="Lunch Period">
+                </div>
+                <div class="form-group">
+                    <label for="graduation-year">Graduation Year</label>
+                    <input type="text" class="form-control" id="graduation-year" name="graduation-year" placeholder="Graduation Year">
+                </div>
+                <div class="form-group">
+                    <label for="opportunity">Choose Opportunity</label>
+                    <select class="form-control" id="opportunity" name="opportunity">
+                        {% for opportunity in mentor.opportunities %}
+                            <option value="{{ opportunity.id }}">{{ format_date(opportunity.date) }}, {{ get_session(opportunity.session) }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <p>Before agreeing:</p>
+                    <p>{{ registration_fields }}</p>
+                    <div>
+                        <label class="d-inline-block" for="terms">Agree to the Terms:</label>
+                        <input type="checkbox" class="form-control d-inline-block" id="terms" name="terms">
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "template.html" %}
+
+{% block title %}Reports{% endblock %}
+
+{% block body %}
+    <div class="text-center">
+        <p><span class="title">Reports</span></p>
+        <hr/>
+        <p>Reports gather all information to give to both students and mentors. The student report sorts students by last name, and gives information detailing their selected opportunity</p>
+        <p>When printing these reports, pages will be seperateed by individual students and mentors for their respective pages.</p>
+        <p>To download a CSV of past student information, at the top of the page press download.</p>
+        <hr/>
+        <div>
+            <p class="d-inline-block"><span class="title">Student Reports:</span></p>
+            <a class="btn-sm btn-primary" href="{{ url_for('administrator.student_reports') }}">Student Reports</a>
+        </div>
+        <div>
+            <p class="d-inline-block"><span class="title">Mentor Reports:</span></p>
+            <a class="btn-sm btn-primary" href="{{ url_for('administrator.mentor_reports') }}">Mentor Reports</a>
+        </div>
+        <div class="text-center mt-3">
+            <a class="btn-sm btn-secondary" href="{{ url_for('administrator.administrator_landing') }}">Administrator Home</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "template.html" %}
+
+{% block title %}Unconfirmed Student{% endblock %}
+
+{% block body %}
+    <div>
+        <p class="text-center"><span class="title">Unconfirmed Students</span></p>
+        <p class="text-center">Below is a list of all confirmed students. To confirm on this page, click the checkmarks of students to be confirmed and press submit.</p>
+        <hr/>
+        {% if students %}
+            <form method="post" action="/unconfirmed_students">
+                {% for student in students %}
+                    <div class="mt-2 mb-2">
+                        <p class="d-inline-block"><span class="title">#{{ loop.index }}.</span> {{ student.last_name }}, {{ student.first_name }}</p>
+                        <a class="btn-sm btn-primary" href="{{ url_for('mentor.mentor_schedule', mid=student.opportunity.mentor.id) }}">Mentor Schedule</a>
+                        <a class="btn-sm btn-secondary" href="{{ url_for('student.view_student', sid=student.id) }}">View Student</a>
+                        <a class="btn-sm btn-danger" href="{{ url_for('student.delete_student', sid=student.id) }}">Delete Student</a>
+                        <a class="btn-sm btn-success" href="{{ url_for('student.confirm_student', sid=student.id) }}">Confirm Student</a>
+                        <label for="{{ student.id }}" class="ml-4 d-inline-block">Confirm: </label>
+                        <input class="d-inline-block" type="checkbox" name="{{ student.id }}" id="{{ student.id }}" value="confirm">
+                    </div>
+                    <hr/>
+                {% endfor %}
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        {% else %}
+            <p class="text-center">There are no students that are unconfirmed at the moment. Check back as more students register.</p>
+        {% endif %}
+        <div class="text-center">
+            <a class="btn-sm btn-secondary" href="{{ url_for('administrator.administrator_landing') }}">Return to Administrator Home</a>
+        </div>
+    </div>
+{% endblock %}

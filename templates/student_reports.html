@@ -1,0 +1,106 @@
+{% extends "template.html" %}
+
+{% block title %}Student Reports{% endblock %}
+
+{% block body %}
+    <div>
+        <p class="text-center"><span class="title">Student Reports</span></p>
+        <p class="text-center">This page is a compiled list of approved students and their respective mentor and opportunity.</p>
+        {% if not students %}
+            <p class="text-center">There are currently no approved students. Results will appear when students register and are approved.</p>
+        {% else %}
+            <p class="text-center">To download a file containing this report in a tabular display, click the download button</p>
+            <div class="text-center">
+                <a class="btn btn-primary" href="{{ url_for('administrator.student_csv') }}">Download</a>
+            </div>
+            <hr/>
+            {% for student in students %}
+                <table class="print table-sm table-bordered mb-5">
+                    <tr>
+                        <th colspan="2"
+                            class="text-center table-header">{{ student.last_name }}, {{ student.first_name }}</th>
+                    </tr>
+                    <tr>
+                        <td>First Name:</td>
+                        <td>{{ student.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Last Name:</td>
+                        <td>{{ student.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Address:</td>
+                        <td>{{ student.address }}</td>
+                    </tr>
+                    <tr>
+                        <td>Cell Phone:</td>
+                        <td>{{ student.cell_phone }}</td>
+                    </tr>
+                    <tr>
+                        <td>Home Phone:</td>
+                        <td>{{ student.home_phone }}</td>
+                    </tr>
+                    <tr>
+                        <td>Student Email:</td>
+                        <td>{{ student.student_email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Parent Email:</td>
+                        <td>{{ student.parent_email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Lunch Period:</td>
+                        <td>{{ student.lunch_period }}</td>
+                    </tr>
+                    <tr>
+                        <td>Graduation year:</td>
+                        <td>{{ student.graduation_year }}</td>
+                    </tr>
+                    <tr>
+                        <td>Time Registered:</td>
+                        <td>{{ student.registration_time }}</td>
+                    </tr>
+                    <tr class="grey student-mentor-table">
+                        <td>Session Date:</td>
+                        <td>{{ format_date(student.opportunity.date) }}</td>
+                    </tr>
+                    <tr class="grey">
+                        <td>Session Type:</td>
+                        <td>{{ get_session(student.opportunity.session) }}</td>
+                    </tr>
+                    <tr class="grey">
+                        <td>Mentor Name:</td>
+                        <td>{{ student.opportunity.mentor.mentor_name }}</td>
+                    </tr>
+                    <tr class="grey">
+                        <td>Category:</td>
+                        <td>{{ student.opportunity.mentor.category }}</td>
+                    </tr>
+                    <tr class="grey">
+                        <td>Contact Name:</td>
+                        <td>{{ student.opportunity.mentor.contact_name }}</td>
+                    </tr>
+                    <tr class="grey">
+                        <td>Buisness Phone:</td>
+                        <td>{{ student.opportunity.mentor.phone }}</td>
+                    </tr>
+                    <tr class="grey">
+                        <td>Email:</td>
+                        <td>{{ student.opportunity.mentor.email }}</td>
+                    <tr class="grey">
+                        <td>Address:</td>
+                        <td>{{ student.opportunity.mentor.address }}</td>
+                    </tr>
+                    <tr class="grey">
+                        <td>Special Instructions:</td>
+                        <td>{{ student.opportunity.mentor.special_instructions }}</td>
+                    </tr>
+                    <tr class="grey">
+                        <td>Max Students:</td>
+                        <td>{{ student.opportunity.mentor.students }}</td>
+                    </tr>
+                </table>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

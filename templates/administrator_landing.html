@@ -1,0 +1,28 @@
+{% extends "template.html" %}
+
+{% block title %}Administrator Landing{% endblock %}
+
+{% block body %}
+    <div class="summary">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Open Doors flagship logo">
+        <p><span class="title">Open Doors Administrator Panel</span></p>
+        <hr/>
+        <a href="{{ url_for('mentor.add_mentor') }}">Add Mentor</a>
+        <hr/>
+        <a href="{{ url_for('mentor.view_mentors') }}">View Mentors</a>
+        <p class="small">Contains Edit, Delete, and Scheduling Functions.</p>
+        <hr/>
+        <a href="{{ url_for('student.unconfirmed_students') }}">Unconfirmed Students</a>
+        <hr/>
+        <a href="{{ url_for('administrator.student_bulk') }}">Student Bulk Emails</a>
+        <hr/>
+        <a href="{{ url_for('administrator.mentor_bulk') }}">Mentor Bulk Emails</a>
+        <hr/>
+        <a href="{{ url_for('administrator.notifications') }}">Edit Notifications</a>
+        <hr/>
+        <a href="{{ url_for('administrator.reports') }}">Reports</a>
+        <hr/>
+        <a href="{{ url_for('administrator.configuration') }}">Configuration</a>
+        <hr/>
+    </div>
+{% endblock %}

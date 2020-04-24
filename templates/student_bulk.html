@@ -1,0 +1,43 @@
+{% extends "template.html" %}
+
+{% block title %}Bulk Student Emails{% endblock %}
+
+{% block body %}
+    <div>
+        <p class="text-center"><span class="title">Send Bulk Emails to Approved Students</span></p>
+        <p class="text-center">This page sends bulk emails to students that have been approved to their selected mentor opportunity. Additional options can be included.</p>
+        <hr/>
+        <form method="post" action="/student_bulk" onsubmit="return confirmStudentEmail({{ students|length }})">
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" class="form-control" id="subject" name="subject">
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea class="form-control" id="message" name="message" rows="5"></textarea>
+            </div>
+            <div class="mt-5 mb-3">
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="include-schedule" name="include-schedule" value="include-schedule">
+                    <label class="form-check-label" for="include-schedule">Include a copy of their mentor schedule after the message.</label>
+                </div>
+            </div>
+            <div>
+                <div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input" id="parent" name="parent" value="parent">
+                    <label class="form-check-label" for="parent">Send a copy of this email reminder to the parent of the student.</label>
+                </div>
+            </div>
+            <div class="mb-3 mt-3 text-center">
+                <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+        </form>
+        <div class="text-center">
+            <a class="btn-sm btn-secondary" href="{{ url_for('administrator.administrator_landing') }}">Cancel and Return to Administrator Home</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='scripts/email.js') }}"></script>
+{% endblock %}

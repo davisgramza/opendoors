@@ -1,0 +1,22 @@
+{% extends "template.html" %}
+
+{% block title %}Notifications{% endblock %}
+
+{% block body %}
+    <div>
+        <p class="text-center"><span class="title">Notifications</span></p>
+        <hr/>
+        <form action="/notifications" method="post">
+            {% for notification in notifications %}
+                <div class="form-group">
+                    <label for="{{ notification.id }}" class="font-weight-bold">{{ notification.identifier }}</label>
+                    <p>{{ notification.description }}</p>
+                    <textarea class="form-control" name="{{ notification.id }}" id="{{ notification.id }}" rows="5">{{ notification.message }}</textarea>
+                </div>
+            {% endfor %}
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

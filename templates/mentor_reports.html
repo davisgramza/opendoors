@@ -1,0 +1,102 @@
+{% extends "template.html" %}
+
+{% block title %}Mentor Reports{% endblock %}
+
+{% block body %}
+    <div>
+        <p class="text-center"><span class="title">Mentor Reports</span></p>
+        <p class="text-center">This page is a compiled list of mentors and the approved students that have registered
+            for them.</p>
+        {% if not mentors %}
+            <p class="text-center">There are currently no approved students. Results will appear when mentors are added
+                to the program</p>
+        {% else %}
+            <p class="text-center">To download a file containing this report in a tabular display, click the download
+                button</p>
+            <div class="text-center">
+                <a class="btn btn-primary" href="{{ url_for('administrator.mentor_csv') }}">Download</a>
+            </div>
+            <hr/>
+            {% for mentor in mentors %}
+                <table class="print table-sm table-bordered mb-5">
+                    <tr>
+                        <th class="text-center table-header" colspan="2">{{ mentor.mentor_name }}</th>
+                    </tr>
+                    <tr>
+                        <td>Mentor Name:</td>
+                        <td>{{ mentor.mentor_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Status:</td>
+                        <td>{{ mentor.status }}</td>
+                    </tr>
+                    <tr>
+                        <td>Category:</td>
+                        <td>{{ mentor.category }}</td>
+                    </tr>
+                    <tr>
+                        <td>Contact Name:</td>
+                        <td>{{ mentor.contact_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Buisness Phone:</td>
+                        <td>{{ mentor.phone }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td>{{ mentor.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Address:</td>
+                        <td>{{ mentor.address }}</td>
+                    </tr>
+                    <tr>
+                        <td>Max Students:</td>
+                        <td>{{ mentor.students }}</td>
+                    </tr>
+                    {% for opportunity in mentor.opportunities %}
+                        <tr {% if loop.index0 % 2 == 0 %}class="grey"{% endif %}>
+                            <td>Opportunity #{{ loop.index }}.</td>
+                            <td>{{ opportunity.date }}</td>
+                        </tr>
+                        <tr {% if loop.index0 % 2 == 0 %}class="grey"{% endif %}>
+                            <td>Session Type:</td>
+                            <td>{{ opportunity.session }}</td>
+                        </tr>
+                        <tr {% if loop.index0 % 2 == 0 %}class="grey"{% endif %}>
+                            <td>Registered Students:</td>
+                            <td class="">
+                                {% if not opportunity.students %}
+                                    No Registered Students
+                                {% else %}
+                                    {% for student in opportunity.students %}
+                                        {% if student.approved %}
+                                            <div class="border-bottom">
+                                                <p class="table-opportunity-student-information">
+                                                    Name: {{ student.first_name }} {{ student.last_name }}</p>
+                                                <p class="table-opportunity-student-information">
+                                                    Address: {{ student.address }}</p>
+                                                <p class="table-opportunity-student-information">Home
+                                                    Phone: {{ student.home_phone }}</p>
+                                                <p class="table-opportunity-student-information">Cell
+                                                    Phone: {{ student.cell_phone }}</p>
+                                                <p class="table-opportunity-student-information">Student
+                                                    Email: {{ student.student_email }}</p>
+                                                <p class="table-opportunity-student-information">Parent
+                                                    Email: {{ student.parent_email }}</p>
+                                                <p class="table-opportunity-student-information">Lunch
+                                                    Period: {{ student.lunch_period }}</p>
+                                                <p class="table-opportunity-student-information">Graduation
+                                                    Year: {{ student.graduation_year }}</p>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

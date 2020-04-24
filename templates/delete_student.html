@@ -1,0 +1,19 @@
+{% extends "template.html" %}
+
+{% block title %}Delete Student{% endblock %}
+
+{% block body %}
+    <p><span class="title">Delete {{ student.last_name }}, {{ student.first_name }}</span></p>
+    <p>Warning: This action will remove the student from the given opportunity, allowing other students to join in place. If uncomfirmed will remove them from the pool of applicants. If confirmed, will delete them from existing opportunity.</p>
+    <form action="/delete_student/{{ student.id }}" method="post">
+        <div class="form-group">
+            <p>Please confirm to delete student:</p>
+            <label for="confirmation">Confirmation</label>
+            <select name="confirmation" id="confirmation" class="form-control">
+                <option selected disabled> ---</option>
+                <option value="confirm">Confirm</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-danger">Submit</button>
+    </form>
+{% endblock %}

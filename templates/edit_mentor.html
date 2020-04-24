@@ -1,0 +1,109 @@
+{% extends "template.html" %}
+
+{% block title %}Edit Mentor{% endblock %}
+
+{% block body %}
+    <div class="form-wrapper">
+        <p><span class="title">Edit {{ mentor.mentor_name }}</span></p>
+        <hr/>
+        <form action="/edit_mentor/{{ mentor.id }}" method="post">
+            <div class="form-group">
+                <label for="mentor-name">Mentor Name</label>
+                <input type="text" class="form-control" id="mentor-name" name="mentor-name" placeholder="Mentor Name"
+                       value="{{ mentor.mentor_name }}">
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <input type="text" class="form-control" id="category" name="category" placeholder="Category"
+                       value="{{ mentor.category }}">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" name="description" id="description"
+                          rows="5">{{ mentor.description }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="special-instructions">Special Instructions</label>
+                <textarea class="form-control" name="special-instructions" id="special-instructions" rows="5">{{ mentor.special_instructions }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="contact-name">Contact Name</label>
+                <input type="text" class="form-control" id="contact-name" name="contact-name" placeholder="Contact Name" value="{{ mentor.contact_name }}">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone Number" value="{{ mentor.phone }}">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ mentor.email }}">
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="{{ mentor.address }}">
+            </div>
+            <div class="form-group">
+                <label for="students">Number of Students</label>
+                <input type="text" class="form-control" id="students" name="students" placeholder="Number of Students" value="{{ mentor.students }}" {% if has_students %}readonly{% endif %}>
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select name="status" class="form-control" id="status">
+                    <option {% if mentor.status %}selected{% endif %} value="active">Active</option>
+                    <option {% if mentor.status == False %}selected{% endif %} value="inactive">Inactive</option>
+                </select>
+            </div>
+            <div id="opportunities">
+                <p>Opportunties</p>
+                <hr/>
+                {% for opportunity in mentor.opportunities %}
+                    <div id="opportunity{{ loop.index }}" class="mb-2">
+                        <p>Opportunity</p>
+                        {% if opportunity.students %}
+                            <p class="alert-warning">This opportunity can not be edited as there are currently students
+                                for this opportunity.</p>
+                        {% endif %}
+                        <p></p>
+                        <div class="form-group">
+                            <label for="opportunity{{ loop.index }}date">Date</label>
+                            <input type="date" class="form-control" name="opportunity{{ loop.index }}date"
+                                   id="opportunity{{ loop.index }}date" value="{{ opportunity.date }}"
+                                   {% if opportunity.students %}readonly{% endif %}>
+                        </div>
+                        <div class="form-group">
+                            <label for="opportunity{{ loop.index }}session">Session</label>
+                            <select name="opportunity{{ loop.index }}session" class="form-control"
+                                    id="opportunity{{ loop.index }}session"
+                                    {% if opportunity.students %}readonly{% endif %}>
+                                <option value="am" {% if opportunity.session == 'am' %} selected{% endif %}>A.M.
+                                    Session
+                                </option>
+                                <option value="pm" {% if opportunity.session == 'pm' %} selected{% endif %}>P.M.
+                                    Session
+                                </option>
+                                <option value="full" {% if opportunity.session == 'full' %} selected{% endif %}>Full Day
+                                    Session
+                                </option>
+                            </select>
+                        </div>
+                        {% if not opportunity.students %}
+                            <button type="button" onclick="removeOpportunity({{ loop.index }});" class="btn btn-danger">
+                                Remove
+                            </button>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <hr/>
+            <button type="button" class="btn btn-primary" id="add-opportunity"
+                    onclick="addOpportunity({{ mentor.opportunities|length + 1 }});">Add Opportunity
+            </button>
+            <hr/>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='scripts/mentor.js') }}"></script>
+{% endblock %}

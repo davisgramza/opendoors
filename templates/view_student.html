@@ -1,0 +1,27 @@
+{% extends "template.html" %}
+
+{% block title %}View Student{% endblock %}
+
+{% block body %}
+    <div class="justify-content-center summary">
+        <p><span class="title">{{ student.last_name }}, {{ student.first_name }}</span></p>
+        <p><span class="title">Registered For: </span>{{ student.opportunity.mentor.mentor_name }}</p>
+        <hr/>
+        <p><span class="title">Address:</span> {{ student.address }}</p>
+        <p><span class="title">Home Phone:</span> {{ student.home_phone }}</p>
+        <p><span class="title">Cell Phone:</span> {{ student.cell_phone }}</p>
+        <p><span class="title">Student Email:</span> {{ student.student_email }}</p>
+        <p><span class="title">Parent Email:</span> {{ student.parent_email }}</p>
+        <p><span class="title">Lunch Period:</span> {{ student.lunch_period }}</p>
+        <p><span class="title">Graduation Year:</span> {{ student.graduation_year }}</p>
+        <p><span class="title">Registration Time:</span> {{ student.registration_time }}</p>
+        <p><span class="title">Registered Opportunity Date:</span> {{ format_date(student.opportunity.date) }}</p>
+        <p><span class="title">Registered Opportunity Session:</span> {{ get_session(student.opportunity.session) }}</p>
+        <p><span class="title">Opportunity Registration Status: </span>{% if student.approved %}Approved{% else %}NotApproved{% endif %}</p>
+        {% if not student.approved %}
+            <a class="btn btn-success" href="{{ url_for('student.confirm_student', sid=student.id) }}">Confirm Student</a>
+        {% endif %}
+        <a class="btn btn-danger" href="{{ url_for('student.delete_student', sid=student.id) }}">Delete Student</a>
+        <a class="btn btn-primary" href="{{ url_for('mentor.mentor_schedule', mid=student.opportunity.mentor.id) }}">Mentor Schedule</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "template.html" %}
+
+{% block title %}Add Mentor{% endblock %}
+
+{% block body %}
+    <div class="form-wrapper">
+        <p><span class="title">Add Mentor</span></p>
+        <hr/>
+        <form action="/add_mentor" method="post">
+            <div class="form-group">
+                <label for="mentor-name">Mentor Name</label>
+                <input type="text" class="form-control" id="mentor-name" name="mentor-name" placeholder="Mentor Name">
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <input type="text" class="form-control" id="category" name="category" placeholder="Category">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" name="description" id="description" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="special-instructions">Special Instructions</label>
+                <textarea class="form-control" name="special-instructions" id="special-instructions"
+                          rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="contact-name">Contact Name</label>
+                <input type="text" class="form-control" id="contact-name" name="contact-name"
+                       placeholder="Contact Name">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone Number">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+            </div>
+            <div class="form-group">
+                <label for="students">Number of Students</label>
+                <input type="text" class="form-control" id="students" name="students" placeholder="Number of Students">
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select name="status" class="form-control" id="status">
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+            </div>
+            <div id="opportunities">
+                <p>Opportunties</p>
+                <hr/>
+                <div id="opportunity1">
+                    <p>Opportunity</p>
+                    <div class="form-group">
+                        <label for="opportunity1date">Date</label>
+                        <input type="date" class="form-control" name="opportunity1date" id="opportunity1date">
+                    </div>
+                    <div class="form-group">
+                        <label for="opportunity1session">Session</label>
+                        <select name="opportunity1session" class="form-control" id="opportunity1session">
+                            <option value="am">A.M. Session</option>
+                            <option value="pm">P.M. Session</option>
+                            <option value="full">Full Day Session</option>
+                        </select>
+                    </div>
+                    <button type="button" onclick="removeOpportunity(1);" class="btn btn-danger">Remove</button>
+                    <hr/>
+                </div>
+            </div>
+            <hr/>
+            <button type="button" class="btn btn-primary" id="add-opportunity" onclick="addOpportunity(2);">Add
+                Opportunity
+            </button>
+            <hr/>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='scripts/mentor.js') }}"></script>
+{% endblock %}

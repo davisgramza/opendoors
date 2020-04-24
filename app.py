@@ -1,5 +1,6 @@
 import logging
 import traceback
+import os
 
 from flask import Flask, request, render_template, redirect, url_for
 from flask_login import LoginManager, login_user, logout_user
@@ -9,15 +10,15 @@ from flask_sqlalchemy import SQLAlchemy
 from messages import Errors
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:password@localhost/opendoors'
-app.secret_key = '--key--'
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_USERNAME'] = '--email--'
-app.config['MAIL_PASSWORD'] = '--password--'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + os.getenv('DATABASE_USERNAME', default='admin') + ':' + os.getenv('DATABASE_PASSWORD', default='password') + '@' + os.getenv('DATABASE_SERVER', default='localhost') + os.getenv('DATABASE_PORT', default='3306') + '/' + os.getenv('DATABASE_NAME')
+app.secret_key = os.getenv('SECRET_KEY', default='8648d22e542ca1188d20de52b52c6d33d209704f508f21fc')
+app.config['MAIL_SERVER'] = os.getenv('PROGRAM_EMAIL_SERVER')
+app.config['MAIL_USERNAME'] = os.getenv('PROGRAM_EMAIL_ADDRESS')
+app.config['MAIL_PASSWORD'] = os.getenv('PROGRAM_EMAIL_PASSWORD')
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USER_SSL'] = False
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_DEFAULT_SENDER'] = '--email--'
+app.config['MAIL_PORT'] = os.getenv('PROGRAM_EMAIL_PORT')
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv('PROGRAM_EMAIL_ADDRESS')
 
 db = SQLAlchemy(app)
 mail = Mail(app)

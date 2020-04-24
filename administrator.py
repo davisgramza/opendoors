@@ -2,6 +2,7 @@ import logging
 import traceback
 
 from flask import request, render_template, redirect, Blueprint, url_for, Response
+from flask_login import login_required
 
 from app import send_mail, db
 from helpers import *
@@ -10,12 +11,14 @@ from messages import Errors
 administrator = Blueprint('administrator', __name__, template_folder='templates')
 
 
+@login_required
 @administrator.route('/landing', methods=['GET'])
 def administrator_landing():
     if request.method == 'GET':
         return render_template('administrator_landing.html')
 
 
+@login_required
 @administrator.route('/configuration', methods=['GET', 'POST'])
 def configuration():
     settings = Configuration.query.first()
@@ -42,6 +45,7 @@ def configuration():
         return render_template('configuration.html', configuration=settings)
 
 
+@login_required
 @administrator.route('/notifications', methods=['GET', 'POST'])
 def notifications():
     messages = Notification.query.all()
@@ -64,12 +68,14 @@ def notifications():
         return render_template('notifications.html', notifications=messages)
 
 
+@login_required
 @administrator.route('/reports', methods=['GET'])
 def reports():
     if request.method == 'GET':
         return render_template('reports.html')
 
 
+@login_required
 @administrator.route('/student_reports', methods=['GET'])
 def student_reports():
     if request.method == 'GET':
@@ -78,6 +84,7 @@ def student_reports():
                                get_session=get_session)
 
 
+@login_required
 @administrator.route('/mentor_reports', methods=['GET'])
 def mentor_reports():
     if request.method == 'GET':
@@ -85,6 +92,7 @@ def mentor_reports():
         return render_template('mentor_reports.html', mentors=mentors)
 
 
+@login_required
 @administrator.route('/student_csv', methods=['GET'])
 def student_csv():
     if request.method == 'GET':
@@ -113,6 +121,7 @@ def student_csv():
                         headers={'Content-Disposition': 'attachment; filename=students.csv'})
 
 
+@login_required
 @administrator.route('/mentor_csv', methods=['GET'])
 def mentor_csv():
     if request.method == 'GET':
@@ -142,6 +151,7 @@ def mentor_csv():
                         headers={'Content-Disposition': 'attachment; filename=mentors.csv'})
 
 
+@login_required
 @administrator.route('/student_bulk', methods=['GET', 'POST'])
 def student_bulk():
     students = Student.query.filter_by(approved=True).all()
@@ -174,6 +184,7 @@ def student_bulk():
         return render_template('student_bulk.html', students=students)
 
 
+@login_required
 @administrator.route('/mentor_bulk', methods=['GET', 'POST'])
 def mentor_bulk():
     mentors = Mentor.query.all()
@@ -211,6 +222,7 @@ def mentor_bulk():
         return render_template('mentor_bulk.html', mentors=mentors, registered_mentors=registered_mentors)
 
 
+@login_required
 @administrator.route('/reset', methods=['GET', 'POST'])
 def reset():
     if request.method == 'POST':

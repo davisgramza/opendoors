@@ -2,6 +2,7 @@ import logging
 import traceback
 
 from flask import request, render_template, redirect, Blueprint, url_for
+from flask_login import login_required
 
 from app import send_mail
 from helpers import *
@@ -64,6 +65,7 @@ def register(mid):
                                disclaimer=disclaimer, registration_fields=registration_fields)
 
 
+@login_required
 @student.route('/view_student/<sid>', methods=['GET'])
 def view_student(sid):
     viewed_student = Student.query.get(sid)
@@ -74,6 +76,7 @@ def view_student(sid):
                                get_session=get_session)
 
 
+@login_required
 @student.route('/delete_student/<sid>', methods=['GET', 'POST'])
 def delete_student(sid):
     deleted_student = Student.query.get(sid)
@@ -122,6 +125,7 @@ def delete_student(sid):
                                get_session=get_session)
 
 
+@login_required
 @student.route('/confirm_student/<sid>', methods=['GET', 'POST'])
 def confirm_student(sid):
     confirmed_student = Student.query.get(sid)
@@ -153,6 +157,7 @@ def confirm_student(sid):
                                get_session=get_session)
 
 
+@login_required
 @student.route('/unconfirmed_students', methods=['GET', 'POST'])
 def unconfirmed_students():
     students = Student.query.filter_by(approved=False).all()

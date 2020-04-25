@@ -92,3 +92,8 @@ def admin():
 def logout():
     logout_user()
     return redirect(url_for('admin'))
+
+
+@login_manager.unauthorized_handler
+def redirect_admin():
+    return redirect(url_for('admin'))

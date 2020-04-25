@@ -120,7 +120,6 @@ def delete_mentor(mid):
 
 
 @mentor.route('/view_mentors', methods=['GET'])
-@login_required
 def view_mentors():
     configuration = Configuration.query.first()
     if request.method == 'GET':
@@ -134,7 +133,7 @@ def view_mentors():
             return render_template('view_mentors.html', mentors=mentors, admin=True, get_session=get_session,
                                    format_date=format_date, status=configuration.program_status)
         else:
-            if configuration.program_status != 'Active':
+            if configuration.program_status == 'Disabled':
                 return redirect(url_for('student.landing'))
             return render_template('view_mentors.html', mentors=mentors, get_session=get_session,
                                    format_date=format_date, status=configuration.program_status)

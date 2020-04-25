@@ -8,7 +8,7 @@
         <img src="{{ url_for('static', filename='logo.png') }}" alt="Open Doors flagship logo">
         <hr/>
         <p>Welcome to Open Doors!</p>
-        <p>The current status of the program is currently <span class="{% if status == 'Active' %}text-success{% elif status  == 'Preview' %}title{% else %}text-danger{% endif %}">{{ status }}</span>
+        <p>The current status of the program is currently <span class="{% if status == 'Active' %}text-success{% elif status  == 'Preview' %}text-warning{% else %}text-danger{% endif %}">{{ status }}</span>
         </p>
         <p>{{ message }}</p>
         <a class="btn btn-primary" href="{{ url_for('mentor.view_mentors') }}">View Opportunities</a>

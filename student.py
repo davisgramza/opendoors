@@ -65,8 +65,8 @@ def register(mid):
                                disclaimer=disclaimer, registration_fields=registration_fields)
 
 
-@login_required
 @student.route('/view_student/<sid>', methods=['GET'])
+@login_required
 def view_student(sid):
     viewed_student = Student.query.get(sid)
     if not viewed_student:
@@ -76,8 +76,8 @@ def view_student(sid):
                                get_session=get_session)
 
 
-@login_required
 @student.route('/delete_student/<sid>', methods=['GET', 'POST'])
+@login_required
 def delete_student(sid):
     deleted_student = Student.query.get(sid)
     approved = deleted_student.approved
@@ -125,8 +125,8 @@ def delete_student(sid):
                                get_session=get_session)
 
 
-@login_required
 @student.route('/confirm_student/<sid>', methods=['GET', 'POST'])
+@login_required
 def confirm_student(sid):
     confirmed_student = Student.query.get(sid)
     if not confirmed_student:
@@ -157,8 +157,8 @@ def confirm_student(sid):
                                get_session=get_session)
 
 
-@login_required
 @student.route('/unconfirmed_students', methods=['GET', 'POST'])
+@login_required
 def unconfirmed_students():
     students = Student.query.filter_by(approved=False).all()
     if request.method == 'POST':

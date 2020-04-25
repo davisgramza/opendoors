@@ -11,8 +11,8 @@ from messages import Errors
 mentor = Blueprint('mentor', __name__, template_folder='templates')
 
 
-@login_required
 @mentor.route('/add_mentor', methods=['GET', 'POST'])
+@login_required
 def add_mentor():
     if request.method == 'POST':
         error = ''
@@ -49,8 +49,8 @@ def add_mentor():
         return render_template('add_mentor.html')
 
 
-@login_required
 @mentor.route('/edit_mentor/<mid>', methods=['GET', 'POST'])
+@login_required
 def edit_mentor(mid):
     edited_mentor = Mentor.query.get(mid)
     has_students = has_registered_students(edited_mentor)
@@ -90,8 +90,8 @@ def edit_mentor(mid):
         return render_template('edit_mentor.html', mentor=edited_mentor, has_students=has_students)
 
 
-@login_required
 @mentor.route('/delete_mentor/<mid>', methods=['GET', 'POST'])
+@login_required
 def delete_mentor(mid):
     deleted_mentor = Mentor.query.get(mid)
     if not deleted_mentor:
@@ -119,8 +119,8 @@ def delete_mentor(mid):
                                registered=has_registered_students(deleted_mentor))
 
 
-@login_required
 @mentor.route('/view_mentors', methods=['GET'])
+@login_required
 def view_mentors():
     configuration = Configuration.query.first()
     if request.method == 'GET':
@@ -140,8 +140,8 @@ def view_mentors():
                                    format_date=format_date, status=configuration.program_status)
 
 
-@login_required
 @mentor.route('/view_mentor/<mid>', methods=['GET'])
+@login_required
 def view_mentor(mid):
     queried_mentor = Mentor.query.get(mid)
     if not queried_mentor:
@@ -150,8 +150,8 @@ def view_mentor(mid):
         return render_template('view_mentor.html', mentor=queried_mentor)
 
 
-@login_required
 @mentor.route('/mentor_schedule/<mid>', methods=['GET'])
+@login_required
 def mentor_schedule(mid):
     scheduled_mentor = Mentor.query.get(mid)
     if not scheduled_mentor:

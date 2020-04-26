@@ -26,6 +26,7 @@
                     {% for opportunity in mentor.opportunities %}
                         <p><span class="title">Opportunity {{ loop.index }}</span>: {{ format_date(opportunity.date) }}, {{ get_session(opportunity.session) }}</p>
                     {% endfor %}
+                    <hr />
                     {% if status == 'Active' %}
                         {% if mentor.waitlist_active %}
                             <p class="text-center alert-warning">This mentor's opportunties have already been filled. If you would like to be notified if an opportunity becomes available, press the button below.</p>

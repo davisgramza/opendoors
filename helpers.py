@@ -103,7 +103,7 @@ def get_opportunities_from_form(request, mentor):
             raise InvalidOpportunityDateException()
         if not is_valid_session(session):
             raise InvalidOpportunitySessionException()
-        opportunity = Opportunity(date=get_date(date), session=session, mentor=mentor)
+        opportunity = Opportunity(date=date, session=session, mentor=mentor)
         opportunities.append(opportunity)
     return opportunities
 

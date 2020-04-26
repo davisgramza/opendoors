@@ -2,11 +2,11 @@
 
 opendoors is a web application developed for Lake Forest High School that aims to facilitate connection between students and job shadowing opportunities provided by mentors.
 
-##Installation
+## Installation
 
 This program is currently configured to deploy to heroku. However, it can be installed as a flask application given a database source consistent with below and the prescence of the below environment variables.
 
-#Database
+## Database
 
 This program can use both MySQL & PostgreSQL to host data. The respective drivers are
 
@@ -29,7 +29,8 @@ To use this program, Environment Variables must be present when the application 
 
 Optional:
  1. ```RESET``` - If this environment varialbe is set to anything, will drop all data within the database, resetting the tables and resetting program configuration information
-##Heroku
+ 
+## Heroku
 
 A Procfile has already been defined within the project
 

@@ -64,16 +64,22 @@ img {
 
 .mentor-section {
     padding: 10px;
-    min-width: 330px;
-    width: 80%;
+    min-width: 400px;
     border-color: darkgrey;
     border-width: 1px;
     border-radius: 5px;
     border-style: solid;
-    max-width: 670px;
     min-height: 300px;
     text-align: center;
-    margin: 0 auto;
+    margin: 10px;
+}
+
+@media screen and (max-width: 400px) {
+    .mentor-section {
+        min-width: 0;
+        width: 100%;
+        font-size: 3.5vw;
+    }
 }
 
 .outline-box {
@@ -129,4 +135,22 @@ table, th, td {
 
 .table-opportunity-student-information {
     margin-bottom: 0;
+}
+
+.mentor-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+.view-mentors-wrapper {
+    margin-top: 48px;
+}
+
+.mentor-search {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
 }

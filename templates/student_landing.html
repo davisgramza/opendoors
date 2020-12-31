@@ -11,6 +11,7 @@
         <p>The current status of the program is currently <span class="{% if status == 'Active' %}text-success{% elif status  == 'Preview' %}text-warning{% else %}text-danger{% endif %}">{{ status }}</span>
         </p>
         <p>{{ message }}</p>
+        <p>Note: This application is filled with sample data for demonstration purposes. Open Doors will reopen with 2021's mentors in November 2021.</p>
         <a class="btn btn-primary" href="{{ url_for('mentor.view_mentors') }}">View Opportunities</a>
     </div>
 {% endblock %}
